@@ -29,7 +29,12 @@ int _printf(const char *format, ...)
         {
             if (format[i] == '%')
             {
-                flagged = 1;
+                if (format[i + 1] == '\0')
+		{
+			va_end(vargs);
+			return(-1);
+		}
+		flagged = 1;
             }
             else
             {
