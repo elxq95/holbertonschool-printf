@@ -19,33 +19,43 @@ int _printf(const char *format, ...)
 
     va_start(vargs, format);
 
-    while (format[i] != '\0')
+    while (format[i] != '\0') /* Loop to iterate each character until it reaches '\0' */
     {
-        if (flagged != 0)
+        if (flagged != 0) /* If flagged != 0, it means previous character was % */
         {
+            if (format[i] == '\0')
+            {
+                va_end(vargs);
+                return (-1);
+            }
             if (format[i] == 'c' || format[i] == 's' || format[i] == '%')
-	    {
-		    pick_operation(format[i], vargs, &size);
-	    }
-	    else
-	    {
-		    putchar('%');
-		    putchar(format[i]);
-		    size += 2;
-	    }
-	    flagged = 0; /* Reset the flag */
-	}
-	else
-	{
-		if (format[i] == '%')
-		{
-			flagged = 1;
-		}
-		else
-		{
-			print_normal(format[i], &size);
-		}
-	}
+            {
+                pick_operation(format[i], vargs, &size); /* If any above, it calls pick_operation function */
+            }
+            else
+            {
+                putchar('%');
+                putchar(format[i]);
+                size += 2;
+            }
+            flagged = 0;
+        }
+        else
+        {
+            if (format[i] == '%')
+            {
+                if (format[i + 1] == '\0')
+                {
+                    va_end(vargs);
+                    return (-1);
+                }
+                flagged = 1;
+            }
+            else
+            {
+                print_normal(format[i], &size);
+            }
+        }
         i++;
     }
 
