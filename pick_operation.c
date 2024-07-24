@@ -1,5 +1,6 @@
 #include "main.h"
 #include <stdarg.h>
+#include <stdio.h>
 
 /**
  * pick_operation - selects the correct print function based on the format specifier
@@ -21,7 +22,9 @@ void pick_operation(char flag, va_list args, int *size)
         print_percent(size);
         break;
     default:
-        print_normal(flag, size);
+	putchar('%');
+	putchar(flag);
+	*size += 2;
         break;
     }
 }
