@@ -22,7 +22,7 @@ void print_string(va_list args, int *size)
     char *str = va_arg(args, char *);
 
     if (str == NULL)
-        str = "(nil)";
+        str = "(null)";
     while (*str != '\0')
     {
         putchar(*str++);
