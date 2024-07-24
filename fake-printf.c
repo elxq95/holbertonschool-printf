@@ -31,9 +31,8 @@ void pick_operation(char flag, va_list args)
 int _printf(const char *format, ...)
 {
 	va_list vargs;
-	int i = 0, size = 0;
+	int i = 0
 	int flagged = 0;
-	char *result;
 
 	if (format == NULL)
 		return (-1);
@@ -45,7 +44,7 @@ int _printf(const char *format, ...)
 		if (flagged)
 		{
 			pick_operation(format[i], vargs);
-			flagged = 0; //Reset the flag
+			flagged = 0;
 		}
 		else
 		{
