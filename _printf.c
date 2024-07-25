@@ -1,64 +1,46 @@
 #include "main.h"
 #include <stdarg.h>
-#include <stdlib.h>
 #include <stdio.h>
 
 /**
- * _printf - produces output according to a format
- * @format: format string
- * Return: the number of characters printed
+ * _printf - Custom printf function
+ * @format: Format string
+ * Return: Number of characters printed
  */
 int _printf(const char *format, ...)
 {
-    va_list vargs;
-    int i = 0, size = 0;
-    int flagged = 0;
+	va_list args;
+	int i;
+	int size;
+	int flagged;
 
-    if (format == NULL)
-        return (-1);
+	if (format == NULL)
+		return (-1);
 
-    va_start(vargs, format);
+	va_start(args, format);
+	size = 0;
+	flagged = 0;
 
-    while (format[i] != '\0') /* Loop to iterate each character until it reaches '\0' */
-    {
-        if (flagged != 0) /* If flagged != 0, it means previous character was % */
-        {
-            if (format[i] == '\0')
-            {
-                va_end(vargs);
-                return (-1);
-            }
-            if (format[i] == 'c' || format[i] == 's' || format[i] == '%')
-            {
-                pick_operation(format[i], vargs, &size); /* If any above, it calls pick_operation function */
-            }
-            else
-            {
-                putchar('%');
-                putchar(format[i]);
-                size += 2;
-            }
-            flagged = 0;
-        }
-        else
-        {
-            if (format[i] == '%')
-            {
-                if (format[i + 1] == '\0')
-                {
-                    va_end(vargs);
-                    return (-1);
-                }
-                flagged = 1;
-            }
-            else
-            {
-                print_normal(format[i], &size);
-            }
-        }
-        i++;
-    }
+	for (i = 0; format[i] != '\0'; i++)
+	{
+		if (flagged == 0)
+		{
+			if (format[i] == '%')
+			{
+				flagged = 1;
+			}
+			else
+			{
+				print_normal(format[i], &size);
+			}
+		}
+		else
+		{
+			pick_operation(format[i], args, &size);
+			flagged = 0;
+		}
+	}
 
-    va_end(vargs);
-    return size;
+	va_end(args);
+	return (size);
 }
