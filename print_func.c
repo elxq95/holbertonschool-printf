@@ -51,3 +51,35 @@ void print_normal(char c, int *size)
 	putchar(c);
 	(*size)++;
 }
+
+/**
+ * print_integer - prints an integer
+ * @args: list of arguments
+ * @size: pointer to the size counter
+ */
+void print_integer(va_list args, int *size)
+{
+	int n = va_arg(args, int);
+	int div = 1;
+	unsigned int num;
+
+	if (n < 0)
+	{
+		putchar('-');
+		num = n * -1;
+		(*size)++;
+	}
+	else
+		num = n;
+
+	while (num / div > 9)
+		div *= 10;
+
+	while (div != 0)
+	{
+		putchar('0' + num / div);
+		num %= div;
+		div /= 10;
+		(*size)++;
+	}
+}
