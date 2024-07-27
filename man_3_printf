@@ -1,1 +1,14 @@
 # _printf() - Holberton Manual Page
+
+
+## Name
+_printf()
+
+## Usages
+
+_printf(const char *format, ...);
+
+## Returns
+
+The length of the printed string or -1 if an error is hit
+
