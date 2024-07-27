@@ -17,10 +17,14 @@ Print the given string (format), in a formatted way by taking into account all f
 s - string of characters
 c - character
 % - Print the % symbol
+d - Print a given number 
+i - Print a given integer
 
 Example s: _printf("string here: %s\n", string_pointer);
 Example c: _printf("character here: %c\n", char);
 Example %: _printf("100%%\n");
+Example d: _printf("Number: %d\n", long int);
+Example i: _printf("Int: %i\n", int);
 
 ## Returns
 
