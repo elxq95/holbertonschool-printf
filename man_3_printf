@@ -8,6 +8,20 @@ _printf()
 
 _printf(const char *format, ...);
 
+## What it does
+Print the given string (format), in a formatted way by taking into account all flags and extra args given, similar to printf().
+
+## Flags
+
+% preceeds any flag given in the format string given, the list of vaid flags are:
+s - string of characters
+c - character
+% - Print the % symbol
+
+Example s: _printf("string here: %s\n", string_pointer);
+Example c: _printf("character here: %c\n", char);
+Example %: _printf("100%%\n");
+
 ## Returns
 
 The length of the printed string or -1 if an error is hit
